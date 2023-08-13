@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const NewTaskContainer = () => {
+export const NewTaskContainer = (): JSX.Element => {
   return (
     <div>NewTaskContainer</div>
   )
