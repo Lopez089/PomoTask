@@ -1,11 +1,19 @@
+import React from 'react'
+import { Nav, Task } from './components'
+import { TaskContainer } from './containers/taskContainer'
 import './App.css'
 
-function App() {
-  
+const App = (): JSX.Element => {
   return (
-    <>
-    <p>hola</p>
-    </>
+    <div>
+      <Nav></Nav>
+      <TaskContainer>
+        <Task></Task>
+      </TaskContainer>
+      <TaskContainer>
+        <Task></Task>
+      </TaskContainer>
+    </div>
   )
 }
 
