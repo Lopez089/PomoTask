@@ -8,6 +8,6 @@ export const Store = ({ children }: store): JSX.Element => {
   return (
     <Context.Provider value={initicalState}>
       {children}
-    </Context.Provider>
+    </Context.Provider >
   )
 }

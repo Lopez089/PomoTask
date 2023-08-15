@@ -1,6 +1,5 @@
 import { type pomodoroState } from './'
 
-export interface initialState {
-  taskName: string
+export interface pomodoroStateContainer {
   pomodoroState: pomodoroState[]
 }
