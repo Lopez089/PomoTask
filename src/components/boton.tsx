@@ -1,7 +1,8 @@
 import React from 'react'
+import { type button } from '../interfaces'
 
-export const Button = (): JSX.Element => {
+export const Button = ({ children, onClick }: button): JSX.Element => {
   return (
-    <button>button</button>
+    <button onClick={onClick}>{children}</button>
   )
 }
