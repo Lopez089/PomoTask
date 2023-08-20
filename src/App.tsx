@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Nav, CardNewTask } from './components'
-import { TaskContainer } from './containers/taskContainer'
+import { Button, Nav } from './components'
+import { TaskContainer, CardNewTaskContainer } from './containers'
 import './App.css'
 
 const App = (): JSX.Element => {
@@ -15,8 +15,7 @@ const App = (): JSX.Element => {
       <Button onClick={handleShowNewTask}>add nueva nota</Button>
       <TaskContainer />
       <TaskContainer />
-
-      <CardNewTask handleShowNewTask={handleShowNewTask} showNewTask={showNewTask} />
+      <CardNewTaskContainer handleShowNewTask={handleShowNewTask} showNewTask={showNewTask} />
     </div>
   )
 }

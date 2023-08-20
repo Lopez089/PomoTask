@@ -1,4 +1,6 @@
 export * from './button'
+export * from './cardNewTask'
+export * from './fild'
 export * from './pomodoroState'
 export * from './pomodoroStateContainer'
 export * from './store'
