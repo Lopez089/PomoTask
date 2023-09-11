@@ -1,8 +1,10 @@
-import React, { type ChangeEvent, useState } from 'react'
+import React, { type ChangeEvent, type FormEvent, useState, useContext } from 'react'
 import { Button, Fild } from '../../components'
 import { type cardNewTask } from '../../interfaces'
-import { v4 as uuidv4 } from 'uuid'
 import './cardNewtaskContainer.css'
+import { Context } from '../../context/store'
+import { v4 as uuidv4 } from 'uuid'
+import { createPomodoroState } from '../../utils'
 
 export const CardNewTaskContainer = ({ handleShowNewTask, showNewTask }: cardNewTask): JSX.Element => {
   const [newTask, setNewTask] = useState({
@@ -11,6 +13,7 @@ export const CardNewTaskContainer = ({ handleShowNewTask, showNewTask }: cardNew
     pomodoroState: 0
   })
   const showCard = showNewTask ? 'show' : 'hidden'
+  const { dispatch } = useContext(Context)
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target
@@ -24,28 +27,43 @@ export const CardNewTaskContainer = ({ handleShowNewTask, showNewTask }: cardNew
     )
   }
 
+  const handleNewTask = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+
+    const newTaskPomodoro = {
+      ...newTask,
+      pomodoroState: createPomodoroState(newTask.pomodoroState)
+    }
+
+    dispatch({ type: 'addNewTask', payload: newTaskPomodoro })
+  }
+
   return (
     <div className={`card_new_task ${showCard}`}>
-      <form >
+      <form onSubmit={(e) => { handleNewTask(e) }}>
         <span onClick={handleShowNewTask}>X</span>
         <div>
           <h3>NUEVA TAREA</h3>
         </div>
-        <Fild label='Tarea' type="text" name='taskName' onChange={handleOnChange} value={newTask.taskName} />
-        <Fild label='Tarea' type="number" name='pomodoroState' onChange={handleOnChange} value={newTask.pomodoroState} max={5} min={1} />
+        <Fild
+          label='Tarea'
+          type="text"
+          name='taskName'
+          onChange={(e) => { handleOnChange(e) }}
+          value={newTask.taskName}
+        />
+        <Fild
+          label='Tarea'
+          type="number"
+          name='pomodoroState'
+          onChange={handleOnChange}
+          value={newTask.pomodoroState}
+          max={5}
+          min={1}
+        />
         <Button>Agregar nueva tarea</Button>
       </form>
 
     </div>
   )
 }
-
-// const pomodoro = (number: number): void => {
-//   Array.from({ length: number }, (_, i) => {
-//     return {
-//       id: { i },
-//       state: 'Pending'
-//     }
-//   })
-// }
-// console.log('🚀 ~ file: cardNewTaskContainer.tsx:48 ~ pomodoro ~ pomodoro:', pomodoro)

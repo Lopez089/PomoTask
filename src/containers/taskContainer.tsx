@@ -4,14 +4,14 @@ import { type task } from '../interfaces'
 import { Task } from '../components'
 
 export const TaskContainer = (): JSX.Element => {
-  const state = useContext<task[]>(Context)
-
+  const { state } = useContext(Context)
+  const { task } = state
   return (
     <>
       <h2>New task</h2>
       <div>
         {
-          state.map(({ taskName, id, pomodoroState }: task): JSX.Element => {
+          task.map(({ taskName, id, pomodoroState }: task): JSX.Element => {
             return (
               <Task
                 key={id}
